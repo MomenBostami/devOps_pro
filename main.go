@@ -12,7 +12,7 @@ import (
 func main() {
 	app := fiber.New()
 	//newwwwwwwweeeeeeeee
-	//hello
+	//hello 7 77 7 
 	app.Use(logger.New())
 
 	app.Get("/", func(c *fiber.Ctx) error {

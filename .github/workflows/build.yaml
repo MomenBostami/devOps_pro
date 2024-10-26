@@ -28,6 +28,4 @@ jobs:
       - name: Scan with tfsec
         run: |
           tfsec -m HIGH
-  build:
-    needs: [scan]
-    strategy
+

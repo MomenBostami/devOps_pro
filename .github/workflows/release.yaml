@@ -24,7 +24,7 @@ jobs:
         run: |
           version=${GITHUB_REF##*/}
           docker push $DOCKER_REPO:$version
-          echo "\`docker run -p 3000:3000 $DOCKER_REPO:$version\`" > release
+          echo "\docker run -p 3000:3000 $DOCKER_REPO:$version\" > release
       - name: Build Binaries
         env:
           CGO_ENABLE: 0

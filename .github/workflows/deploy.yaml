@@ -24,4 +24,4 @@ jobs:
           BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
           cd terraform
           terraform init -backend-config=key=$BRANCH_NAME
-          terraform apply -auto-approve -var environment=$BRANCH_NAME -var image=saadmtsa/devops_docker_demo_palestine:$BRANCH_NAME -var image saadmtsa/devops_docker_demo_palestine:$BRANCH_NAME
+          terraform apply -auto-approve -var environment=$BRANCH_NAME -var image=saadmtsa/devops_docker_demo_palestine:$BRANCH_NAME

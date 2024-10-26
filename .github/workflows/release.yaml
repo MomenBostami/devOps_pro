@@ -11,11 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Docker Login
-        env:
-          DOCKER_USERNAME: saadmtsa
-          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker login -u "momen" -p "momen2002"
+
       - name: Build Docker Image
         run: |
           version=${GITHUB_REF##*/}
@@ -24,7 +22,7 @@ jobs:
         run: |
           version=${GITHUB_REF##*/}
           docker push $DOCKER_REPO:$version
-          echo "\`docker run -p 3000:3000 $DOCKER_REPO:$version\`" > release
+          echo "\docker run -p 3000:3000 $DOCKER_REPO:$version\" > release
       - name: Build Binaries
         env:
           CGO_ENABLE: 0

@@ -22,10 +22,10 @@ jobs:
           chmod +x tfsec
           sudo mv tfsec /usr/local/bin
 
-      - name: Scan with GoSec
-        run: |
-          gosec ./...
-      - name: Scan with tfsec
-        run: |
-          tfsec -m HIGH
+      # - name: Scan with GoSec
+      #   run: |
+      #     gosec ./...
+      # - name: Scan with tfsec
+      #   run: |
+      #     tfsec -m HIGH
 

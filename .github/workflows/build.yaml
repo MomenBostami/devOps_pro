@@ -23,14 +23,6 @@ jobs:
           chmod +x tfsec
           sudo mv tfsec /usr/local/bin
 
-      # - name: Scan with GoSec
-      #   run: |
-      #     gosec ./...
-      
-      # - name: Scan with tfsec
-      #   run: |
-      #     tfsec -m HIGH
-
   build:
     needs: [scan]
     strategy:
@@ -41,29 +33,20 @@ jobs:
           - windows-latest
         go_version:
           - 1.16
-          # - 1.17
-          # - 1.18
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v3
         with:
           go-version: ${{ matrix.go_version }}
+      - name: Download Dependencies
+        run: |
+          go mod download
       - name: Build
         env:
           CGO_ENABLED: 0
         run: |
           go build -o myproject
-      # - name: Run Tests
-      #   run: |
-      #     go test
-      # - name: Integration Test
-      #   shell: bash
-      #   run: |
-      #     ./myproject &
-      #     sleep 2
-      #     res=$(curl localhost:3000)
-      #     [[ $res == 'Hello, World!' ]]
 
   docker-build:
     runs-on: ubuntu-20.04

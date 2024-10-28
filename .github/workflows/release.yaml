@@ -24,9 +24,17 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o windows_amd64
           GOOS=darwin GOARCH=amd64 go build -o darwin_amd64
 
+      - name: Create Local Git Tag
+        id: tag
+        run: |
+          tag_name="v1.0.${GITHUB_RUN_NUMBER}"
+          git tag $tag_name
+          echo "::set-output name=tag::$tag_name"
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.tag.outputs.tag }}
           body_path: release
           files: |
             linux_amd64

@@ -10,19 +10,12 @@ jobs:
       DOCKER_REPO: saadmtsa/devops_docker_demo_palestine
     steps:
       - uses: actions/checkout@v2
-      - name: Docker Login
-        run: |
-          docker login -u "momenbostami" -p "momen2002"
-
+      
       - name: Build Docker Image
         run: |
           version=${GITHUB_REF##*/}
           docker build . -t $DOCKER_REPO:$version
-      - name: Push Docker Image
-        run: |
-          version=${GITHUB_REF##*/}
-          docker push $DOCKER_REPO:$version
-          echo "\docker run -p 3000:3000 $DOCKER_REPO:$version\" > release
+
       - name: Build Binaries
         env:
           CGO_ENABLE: 0
@@ -30,6 +23,7 @@ jobs:
           GOOS=linux GOARCH=amd64 go build -o linux_amd64
           GOOS=windows GOARCH=amd64 go build -o windows_amd64
           GOOS=darwin GOARCH=amd64 go build -o darwin_amd64
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

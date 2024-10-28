@@ -32,7 +32,7 @@ jobs:
           - macos-latest
           - windows-latest
         go_version:
-          - 1.16
+          - 1.17
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
